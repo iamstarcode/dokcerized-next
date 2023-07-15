@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: next-pod
+  labels:
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: next-pod
+      labels:
+        type: front-end
+    spec:
+      containers:
+        - name: dockerized-next
+          image: dockerized-next
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end

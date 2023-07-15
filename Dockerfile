@@ -22,7 +22,7 @@ FROM nginx:1.25.1-alpine as production
 
 ENV NODE_ENV production
 
-#create hmtl directory
+#create hmtl directories
 RUN mkdir -p /var/www/next/html
 RUN mkdir -p /var/www/next-1/html
 
