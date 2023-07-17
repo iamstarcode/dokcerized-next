@@ -22,15 +22,12 @@ FROM nginx:1.25.1-alpine as production
 
 ENV NODE_ENV production
 
-#create hmtl directories
-RUN mkdir -p /var/www/app/html
-
 # Copy built assets from `builder` image
 COPY --from=builder /app/out /var/www/app/html
 
 # Add your nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Expose port
-EXPOSE 80 3000
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
