@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: client-app
+  labels:
+    app: client-app
+    tier: front-end
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: client-pod
+      labels:
+        app: client
+        tier: front-end
+    spec:
+      containers:
+        - image: client
+          name: client
+          imagePullPolicy: IfNotPresent
+  selector:
+    matchLabels:
+      tier: front-end
