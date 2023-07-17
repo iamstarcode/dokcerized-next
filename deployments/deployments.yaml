@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: next-deployment
+spec:
+  template:
+    metadata:
+      name: next-pod
+      labels:
+        type: front-end
+    spec:
+      containers:
+        - name: dockerized-next
+          image: dockerized-next
+          imagePullPolicy: IfNotPresent
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
