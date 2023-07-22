@@ -1,10 +1,7 @@
 FROM node:18-alpine as builder
 
-#add curl
-#RUN apk --no-cache add curl 
 WORKDIR /app
 
-#RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 RUN corepack enable
 RUN corepack prepare pnpm@latest --activate
 
@@ -18,16 +15,17 @@ RUN pnpm install -r --offline --prod
 RUN pnpm build
 
 # Bundle static assets with nginx
-FROM nginx:1.25.1-alpine as production
+FROM node:18-alpine  as production
+
+WORKDIR /app
 
 ENV NODE_ENV production
 
-# Copy built assets from `builder` image
-COPY --from=builder /app/out /var/www/app/html
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
 
-# Add your nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Expose port
-EXPOSE 80
+EXPOSE 3000
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
