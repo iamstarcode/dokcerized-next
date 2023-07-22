@@ -14,7 +14,6 @@ ADD . ./
 RUN pnpm install -r --offline --prod
 RUN pnpm build
 
-# Bundle static assets with nginx
 FROM node:18-alpine  as production
 
 WORKDIR /app
