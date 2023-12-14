@@ -2,3 +2,5 @@ services:
   client:
     build: ./client
     image: client
+    ports:
+      - 1000:3000

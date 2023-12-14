@@ -5,9 +5,12 @@ import emojis from './emojis';
 
 const router = express.Router();
 
-router.get<{}, MessageResponse>('/', (req, res) => {
+router.get<{}>('/', (req, res) => {
   res.json({
-    message: 'API - 👋🌎🌍🌏',
+    message: 'Qwtetet API - 👋🌎🌍🌏',
+    email: 'iajjdj@yaho.com',
+    name: 'Iajapa ',
+    boooks: ['dgcdgceg', 'fhegfyegfye'],
   });
 });
 
