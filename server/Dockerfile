@@ -14,7 +14,7 @@ ADD . ./
 RUN pnpm install -r --offline
 RUN pnpm build
 
-FROM node:18-alpine  as production
+FROM node:20-alpine  as production
 
 WORKDIR /app
 
